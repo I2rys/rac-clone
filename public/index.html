@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>RAC_Clone</title>
+    </head>
+    <body>
+        <!-- Dependencies -->
+        <link rel="stylesheet" href="resources/css/index.css">
+        <link rel="stylesheet" href="plugins/paginationjs/dist/pagination.css">
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="plugins/paginationjs/src/pagination.js"></script>
+
+        <!-- Main -->
+        <div id="top-panel">
+            <img src="resources/images/favicon.ico" id="top-panel-icon">
+            <a href="https://discord.com/invite/kxT7t4T633"><img src="resources/images/discord.png" id="top-panel-discord"></a>
+            <h3 id="rac">Roblox Anti Cheat</h3>
+        </div>
+
+        <div id="wrapper">
+            <section>
+                <div class="data-container"></div>
+                <div id="pagination-data"></div>
+            </section>
+        </div>
+
+        <div id="main">
+            <script>
+                var results = []
+
+                fetch("/bans").then((response) => response.json()).then((bans)=>{
+                    results = bans
+                })
+                
+                $(function() {
+                  (function(name) {
+                    setTimeout(function(){
+                        var container = $("#pagination-" + name)
+                        var sources = function () {
+                            return results
+                        }()
+                    
+                        var options = {
+                            dataSource: sources,
+                            callback: function (response, pagination) {
+                                window.console && console.log(response, pagination)
+                        
+                                var dataHtml = `<table style="position: relative; top: 50px; background-color: white; border-collapse: collapse; border-radius: 10px; border-spacing: 1; width: 100%;">
+<thead style="background-color: #36304A; color: white; border-radius: 25px; wight: 20px;">
+    <th style="text-align: center;">Picture</th>
+    <th style="text-align: center;">Name</th>
+    <th style="text-align: center;">ID</th>
+    <th style="text-align: center;">Hacks</th>
+    <th style="text-align: center;">Ban Duration</th>
+    <th style="text-align: center;">Date</th>
+<tbody>`
+                        
+                                $.each(response, function (index, item) {
+                                dataHtml += `<tr>
+    <td style="position: relative; text-align: center;"><img src="${item.profile_picture}"></img></td>
+    <td style="position: relative; text-align: center;">${item.name}</td>
+    <td style="position: relative; text-align: center;">${item.id}</td>
+    <td style="position: relative; text-align: center;">${item.hacks}</td>
+    <td style="position: relative; text-align: center;">${item.ban_duration}</td>
+    <td style="position: relative; text-align: center;">${item.ban_date}</td>
+</tr>`
+                                });
+                        
+                                dataHtml += `</tbody>
+</thead>
+</table>`
+                        
+                                container.prev().html(dataHtml)
+                            }
+                        }
+                    
+                        container.addHook("beforeInit", function(){
+                            window.console && console.log("beforeInit...")
+                        })
+
+                        container.pagination(options)
+                    
+                        container.addHook("beforePageOnClick", function(){
+                            window.console && console.log("beforePageOnClick...")
+                        })
+                    }, 2000)
+                  })("data")
+                })
+                </script>
+        </div>
+    </body>
+</html>
