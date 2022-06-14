@@ -1,8 +1,8 @@
-body{
+body {
     background-color: #c850c0;
 }
 
-#top-panel{
+#top-panel {
     position: absolute;
     top: 0px;
     background-color: white;
@@ -12,7 +12,7 @@ body{
     margin: 0px;
 }
 
-#top-panel-icon{
+#top-panel-icon {
     position: absolute;
     top: 5px;
     width: 40px;
@@ -20,7 +20,7 @@ body{
     left: 15px;
 }
 
-#top-panel-discord{
+#top-panel-discord {
     position: absolute;
     top: 5px;
     width: 40px;
@@ -28,7 +28,7 @@ body{
     right: 15px;
 }
 
-#rac{
+#rac {
     margin: 0px;
     position: absolute;
     top: 12px;
@@ -36,7 +36,7 @@ body{
     font-size: 20px;
 }
 
-.paginationjs-pages{
+.paginationjs-pages {
     position: absolute;
     top: 620px;
     right: 645px;
