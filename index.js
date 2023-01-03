@@ -24,6 +24,4 @@ web.use(express.static(path.resolve(__dirname, "public")), function(req, res){
     }
 })
 
-web.listen(port, ()=>{
-    console.log(`Server is running. Port: ${port}`)
-})
+web.listen(port, ()=>console.log(`Server is running. Port: ${port}`))
